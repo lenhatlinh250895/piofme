@@ -69,8 +69,9 @@ Route::group(['prefix' => 'system', 'middleware' => 'AdminLoginMiddleware'], fun
         Route::post('edit', 'Admin\AdminController@postEditFooter')->name('system.admin.footer.postEditFooter');
     });
     Route::group(['prefix' => 'user'], function () {
-        Route::get('list', 'System\UserController@getListUser')->name('system.user.getListUser');
-        Route::post('add', 'System\UserController@postAddUser')->name('system.user.postAddUser');
+        Route::get('list', 'Admin\AdminLoginController@getListUser')->name('system.admin.user.getListUser');
+        Route::get('add', 'Admin\AdminLoginController@getAddUser')->name('system.admin.user.getAddUser');
+        Route::post('add', 'Admin\AdminLoginController@postAddUser')->name('system.admin.user.postAddUser');
         Route::get('delete/{id}', 'Admin\AdminLoginController@getDeleteUser')->name('system.admin.user.getDeleteUser');
         Route::get('edit/{locale}/{id}', 'Admin\AdminLoginController@getEditUser')->name('system.admin.user.getEditUser');
         Route::post('edit', 'Admin\AdminLoginController@postEditUser')->name('system.admin.user.postEditUser');

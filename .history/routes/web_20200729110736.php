@@ -73,7 +73,7 @@ Route::group(['prefix' => 'system', 'middleware' => 'AdminLoginMiddleware'], fun
         Route::get('list', 'System\UserController@getListUser')->name('system.user.getListUser');
         Route::post('add', 'System\UserController@postAddUser')->name('system.user.postAddUser');
         Route::post('ajax', 'System\UserController@postAjax')->name('system.user.postAjax');
-        Route::get('ajax-edit', 'System\UserController@postAjaxEdit')->name('system.user.postAjaxEdit');
+        Route::post('ajax-edit', 'System\UserController@postAjaxEdit')->name('system.user.postAjaxEdit');
         Route::get('delete/{id}', 'Admin\AdminLoginController@getDeleteUser')->name('system.admin.user.getDeleteUser');
         Route::get('edit/{locale}/{id}', 'Admin\AdminLoginController@getEditUser')->name('system.admin.user.getEditUser');
         Route::post('edit', 'Admin\AdminLoginController@postEditUser')->name('system.admin.user.postEditUser');

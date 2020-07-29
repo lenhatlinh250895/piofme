@@ -40,7 +40,7 @@ class UserController extends Controller
 
     public function postAjaxEdit(Request $req){
         $id = $req->id;
-        $name = $req->name;
+        echo $name = $req->name;
         $level = $req->level;
         if ($req->password != "") {
             $password = bcrypt($request->password);
@@ -48,9 +48,9 @@ class UserController extends Controller
         }
         $update_user = User::where('id', $id)->update(['name' => $name, 'level' => $level]);
         if($update_user){
-            echo true;
+            echo "true";
         }else{
-            echo false;
+            echo "false";
         }
     }
 }

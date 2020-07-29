@@ -37,20 +37,4 @@ class UserController extends Controller
         $user = User::find($id);
         echo $user;
     }
-
-    public function postAjaxEdit(Request $req){
-        $id = $req->id;
-        $name = $req->name;
-        $level = $req->level;
-        if ($req->password != "") {
-            $password = bcrypt($request->password);
-            User::where('id', $id)->update(['name' => $name, 'level' => $level, 'password' =>$password]);
-        }
-        $update_user = User::where('id', $id)->update(['name' => $name, 'level' => $level]);
-        if($update_user){
-            echo true;
-        }else{
-            echo false;
-        }
-    }
 }

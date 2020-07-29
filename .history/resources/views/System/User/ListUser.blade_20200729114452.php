@@ -91,7 +91,7 @@
                             </thead>
                             <tbody>
                                 @foreach ($user as $item)
-                                <tr id="id_{{$item->id}}">
+                                <tr id="1">
                                     <td><span class="tabledit-span tabledit-identifier">{{ $item->id }}</span><input class="tabledit-input tabledit-identifier" type="hidden" name="id" value="1" disabled=""></td>
                                     <td class="tabledit-view-mode"><span class="tabledit-span">{{ $item->name }}</span><input class="tabledit-input form-control input-sm" type="text" name="col1" value="John" style="display: none;" disabled=""></td>
                                     <td class="tabledit-view-mode"><span class="tabledit-span">{{ $item->email }}</span><input class="tabledit-input form-control input-sm" type="text" name="col1" value="Doe" style="display: none;" disabled=""></td>
@@ -147,13 +147,13 @@
             <div class="col-md-12 col-lg-6 ">
                 <div class="form-group">
                 <label>Password</label>
-                <input class="form-control inp-password" name="password" type="password" value="" id="example-text-input"
+                <input class="form-control inp-password" name="password" type="password " value="" id="example-text-input"
                     placeholder="New password">
                 </div>
             </div><div class="col-md-12 col-lg-6 ">
                 <div class="form-group">
                 <label>Password Confirm</label>
-                <input class="form-control inp-password-confirm" name="passwordconfirm" type="password" value="" id="example-text-input"
+                <input class="form-control inp-password-confirm" name="passwordconfirm" type="password " value="" id="example-text-input"
                     placeholder="New password confirm">
                 </div>
             </div>
@@ -205,39 +205,23 @@
 
     $('.btn-submit').on('click', function(){
         event.preventDefault();
-        var error = [];
         if($('.inp-name').val() == ''){
-            error.push('The name field is required');
+            toastr.error('The name field is required', 'Error!', {timeOut: 3500});
+            return;
         }
         if($('.inp-password').val() != ''){
             if($('.inp-password').val() != $('.inp-password-confirm').val()){
-                error.push('The password again and password must match');
+                toastr.error('The password again and password must match', 'Error!', {timeOut: 3500});
+                return;
             }
         }
-        if(error.length > 0){
-            $.each(error, function (index, value) {
-                toastr.error(value, 'Error!', {timeOut: 3500});
-            });
-            return;
-        }
-        console.log(error);
         var data = $('form#formedit').serialize();
-        console.log(data);
         $.ajax({
-            type: 'GET',
+            type: 'POST',
             url: "{{ route('system.user.postAjaxEdit')}}",
-            data: data,
-            // dataType: 'JSON',
+            data: {_token: token, data: data},
             success: function($result){
-                if($result){
-                    setTimeout(function(){
-                        location.reload();
-                        }, 3500);
-                    $('#modalEditUser').modal('hide')
-                    toastr.success('Update user successfully!', 'Success!', {timeOut: 3500});
-                }else{
-                    toastr.error('Update user error!', 'Error!', {timeOut: 3500});
-                }
+                console.log($result);
             },
         });
     })

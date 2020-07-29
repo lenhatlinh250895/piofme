@@ -48,9 +48,9 @@ class UserController extends Controller
         }
         $update_user = User::where('id', $id)->update(['name' => $name, 'level' => $level]);
         if($update_user){
-            echo true;
+            echo "true";
         }else{
-            echo false;
+            echo "false";
         }
     }
 }

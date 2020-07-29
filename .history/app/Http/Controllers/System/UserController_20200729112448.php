@@ -40,17 +40,33 @@ class UserController extends Controller
 
     public function postAjaxEdit(Request $req){
         $id = $req->id;
-        $name = $req->name;
-        $level = $req->level;
-        if ($req->password != "") {
+        $this->validate(
+            $request,
+            [
+                'name' => 'required|min:3',
+            ],
+        );
+        $name = $request->name;
+        $level = $request->level;
+        if ($request->password != "") {
+            $this->validate(
+                $request,
+                [
+                    'password' => 'required|min:3|max:32',
+                    'passwordAgain' => 'required|same:password'
+                ],
+                [
+                    'password.required' => 'Bạn chưa nhập mật khẩu',
+                    'password.min' => 'Mật khẩu phải có ít nhất 3 ký tự',
+                    'password.max' => 'Mật khẩu tối đa 32 ký tự',
+                    'passwordAgain.required' => 'Bạn chưa nhập lại mật khẩu',
+                    'passwordAgain.same' => 'Mật khẩu nhập lại chưa khớp'
+                ]
+            );
             $password = bcrypt($request->password);
-            User::where('id', $id)->update(['name' => $name, 'level' => $level, 'password' =>$password]);
+            UserModel::where('id', $request->id)->update(['name' => $name, 'level' => $level, 'password' =>$password]);
         }
-        $update_user = User::where('id', $id)->update(['name' => $name, 'level' => $level]);
-        if($update_user){
-            echo true;
-        }else{
-            echo false;
-        }
+        UserModel::where('id', $request->id)->update(['name' => $name, 'level' => $level]);
+        return redirect('system/admin/user/edit/' . $request->locale . '/' . $request->id)->with('thongbao', 'Bạn đã sửa thành công');
     }
 }

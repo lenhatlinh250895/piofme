@@ -49,7 +49,7 @@
                     </div>
                     <a class="dropdown-item" data-toggle="modal" data-target="#change-password"><i class="mdi mdi-wallet "></i> Change Password</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item text-danger" href="{{ route('getLogout') }}"><i class="mdi mdi-power text-danger"></i> Logout</a>
+                    <a class="dropdown-item text-danger" href="{{ route('system.admin.getLogout') }}"><i class="mdi mdi-power text-danger"></i> Logout</a>
                 </div>
             </li>
         </ul>

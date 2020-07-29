@@ -11,9 +11,6 @@ class LoginController extends Controller
 {
     public function getLogin()
     {
-        if(Auth::check()){
-            return redirect()->route('Dashbroad.getIndex');
-        }
         return view('Auth.Login');
     }
 

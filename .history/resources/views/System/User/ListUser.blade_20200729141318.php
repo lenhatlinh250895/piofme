@@ -233,7 +233,7 @@
                     setTimeout(function(){
                         location.reload();
                         }, 3500);
-                    $('#modalEditUser').modal('hide')
+                    $('#formedit').modal('hide')
                     toastr.success('Update user successfully!', 'Success!', {timeOut: 3500});
                 }else{
                     toastr.error('Update user error!', 'Error!', {timeOut: 3500});

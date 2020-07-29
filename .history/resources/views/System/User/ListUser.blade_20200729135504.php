@@ -91,7 +91,7 @@
                             </thead>
                             <tbody>
                                 @foreach ($user as $item)
-                                <tr id="id_{{$item->id}}">
+                                <tr id="1">
                                     <td><span class="tabledit-span tabledit-identifier">{{ $item->id }}</span><input class="tabledit-input tabledit-identifier" type="hidden" name="id" value="1" disabled=""></td>
                                     <td class="tabledit-view-mode"><span class="tabledit-span">{{ $item->name }}</span><input class="tabledit-input form-control input-sm" type="text" name="col1" value="John" style="display: none;" disabled=""></td>
                                     <td class="tabledit-view-mode"><span class="tabledit-span">{{ $item->email }}</span><input class="tabledit-input form-control input-sm" type="text" name="col1" value="Doe" style="display: none;" disabled=""></td>
@@ -226,18 +226,10 @@
         $.ajax({
             type: 'GET',
             url: "{{ route('system.user.postAjaxEdit')}}",
-            data: data,
+            data: {_token: token, data},
             // dataType: 'JSON',
             success: function($result){
-                if($result){
-                    setTimeout(function(){
-                        location.reload();
-                        }, 3500);
-                    $('#modalEditUser').modal('hide')
-                    toastr.success('Update user successfully!', 'Success!', {timeOut: 3500});
-                }else{
-                    toastr.error('Update user error!', 'Error!', {timeOut: 3500});
-                }
+                console.log($result);
             },
         });
     })

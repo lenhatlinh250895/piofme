@@ -15,8 +15,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('system/login', 'Auth\LoginController@getLogin')->name('getLogin');
-Route::post('system/login', 'Auth\LoginController@postLogin')->name('postLogin');
+Route::get('System/Login', 'Auth\LoginController@getLogin')->name('getLogin');
+Route::post('System/Login', 'Auth\LoginController@postLogin')->name('postLogin');
 Route::get('logout', 'Auth\LoginController@getLogout')->name('getLogout');
 
 Route::group(['prefix' => 'system', 'middleware' => 'AdminLoginMiddleware'], function () {
@@ -72,8 +72,6 @@ Route::group(['prefix' => 'system', 'middleware' => 'AdminLoginMiddleware'], fun
     Route::group(['prefix' => 'user'], function () {
         Route::get('list', 'System\UserController@getListUser')->name('system.user.getListUser');
         Route::post('add', 'System\UserController@postAddUser')->name('system.user.postAddUser');
-        Route::post('ajax', 'System\UserController@postAjax')->name('system.user.postAjax');
-        Route::get('ajax-edit', 'System\UserController@postAjaxEdit')->name('system.user.postAjaxEdit');
         Route::get('delete/{id}', 'Admin\AdminLoginController@getDeleteUser')->name('system.admin.user.getDeleteUser');
         Route::get('edit/{locale}/{id}', 'Admin\AdminLoginController@getEditUser')->name('system.admin.user.getEditUser');
         Route::post('edit', 'Admin\AdminLoginController@postEditUser')->name('system.admin.user.postEditUser');

@@ -230,10 +230,7 @@
             // dataType: 'JSON',
             success: function($result){
                 if($result){
-                    setTimeout(function(){
-                        location.reload();
-                        }, 3500);
-                    $('#modalEditUser').modal('hide')
+                    setTimeout(location.reload(), 3500);
                     toastr.success('Update user successfully!', 'Success!', {timeOut: 3500});
                 }else{
                     toastr.error('Update user error!', 'Error!', {timeOut: 3500});

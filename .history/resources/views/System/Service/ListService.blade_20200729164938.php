@@ -1,6 +1,6 @@
 @extends('System.Layouts.Master')
 @section('title')
-	List User
+	List Service
 @endsection
 @section('content')
 <div class="container-fluid">
@@ -8,7 +8,7 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="page-title-box">
-                <h4 class="page-title">USER</h4>
+                <h4 class="page-title">SERVICE</h4>
             </div>
         </div>
     </div>
@@ -17,18 +17,26 @@
 			<div class="card m-b-30">
 				<div class="card-header p-3 m-0 text-center">
 					<h5 class="card-title m-0 text-uppercase text-left ml-2">
-						ADD USER
+						ADD SERVICE
 					</h5>
 				</div>
 				<div class="card-body">
-					<form action="{{ route('system.user.postAddUser') }}" method="post"  enctype="multipart/form-data">
+					<form action="{{ route('system.service.postAddService') }}" method="post"  enctype="multipart/form-data">
 						@csrf
 						<div class="form-group row">
-                            <label for="example-text-input" class="col-sm-2 col-form-label">Name</label>
-                            <div class="col-sm-10">
-                                <input name="name" class="form-control" type="text" id="example-text-input" >
-                            </div>
-                        </div>
+							<label for="example-text-input" class="col-sm-2 col-form-label">Images</label>
+							<div class="col-sm-10">
+								<div class="input-group mt-2">
+									<span class="input-group-btn">
+										<a data-input="thumbnail" data-preview="holder" class="btn btn-primary lfm">
+											<i class="fa fa-picture-o"></i> Choose
+										</a>
+									</span>
+									<input id="thumbnail" name="imageSlide" class="form-control" type="text">
+									<input name="alt_image" class="form-control" type="text" placeholder="Alt image">
+								</div>
+							</div>
+						</div>
                         <div class="form-group row">
                             <label for="example-text-input" class="col-sm-2 col-form-label">Email</label>
                             <div class="col-sm-10">
@@ -75,7 +83,7 @@
             <div class="card m-b-30">
                 <div class="card-header p-3 m-0 text-center">
 					<h5 class="card-title m-0 text-uppercase text-left ml-2">
-						LIST USER
+						LIST SERVICE
 					</h5>
 				</div>
                 <div class="card-body pt-0">
@@ -84,35 +92,36 @@
                             <thead>
                                 <tr>
                                 <th>ID</th>
-                                <th>NAME</th>
-                                <th>EMAIL</th>
-                                <th>LEVEL</th>
+                                <th>IMAGE</th>
+                                <th>ALT</th>
+                                <th>INTRODUCE</th>
+                                <th>STATUS</th>
                                 <th class="tabledit-toolbar-colitemn">ACTION</th></tr>
                             </thead>
                             <tbody>
-                                @foreach ($user as $item)
+                                @foreach ($service as $item)
                                 <tr id="id_{{$item->id}}">
                                     <td><span class="tabledit-span tabledit-identifier">{{ $item->id }}</span><input class="tabledit-input tabledit-identifier" type="hidden" name="id" value="1" disabled=""></td>
-                                    <td class="tabledit-view-mode"><span class="tabledit-span">{{ $item->name }}</span><input class="tabledit-input form-control input-sm" type="text" name="col1" value="John" style="display: none;" disabled=""></td>
-                                    <td class="tabledit-view-mode"><span class="tabledit-span">{{ $item->email }}</span><input class="tabledit-input form-control input-sm" type="text" name="col1" value="Doe" style="display: none;" disabled=""></td>
-                                    <td class="tabledit-view-mode"><span class="tabledit-span">{{ $item->level == 0 ? 'Manager' : '' }}     
+                                    <td class="tabledit-view-mode"><span class="tabledit-span">{{ $item->image }}</span><input class="tabledit-input form-control input-sm" type="text" name="col1" value="John" style="display: none;" disabled=""></td>
+                                    <td class="tabledit-view-mode"><span class="tabledit-span">{{ $item->alt }}</span><input class="tabledit-input form-control input-sm" type="text" name="col1" value="Doe" style="display: none;" disabled=""></td>
+                                    <td class="tabledit-view-mode"><span class="tabledit-span">{{ $item->introduce }}     
                                     </span><input class="tabledit-input form-control input-sm" type="text" name="col3" value="john@example.com" style="display: none;" disabled="">
-                                </td>
-                                
-                                <td style="white-space: nowrap; width: 15%;"><div class="tabledit-toolbar btn-toolbar" style="text-align: left;">
-                                @if($item->level != 1)
-                                <div class="btn-group btn-group-sm" style="float: none;">
-                                    <button type="button" data-toggle="modal" data-target="#modalEditUser" data-id="{{$item->id}}" class="btn-edit tabledit-edit-button btn btn-sm btn-light" style="float: none; margin: 5px;"><span class="ti-pencil"></span></button>
-                                    <button type="button" data-id="{{$item->id}}" class="btn-delete tabledit-delete-button btn btn-sm btn-light" style="float: none; margin: 5px;"><span class="ti-trash text-danger"></span></button></div>
-                                </div>
-                                @endif
-                                </td>
+                                    </td>
+                                    <td class="tabledit-view-mode"><span class="tabledit-span">{{ $item->status }}</span><input class="tabledit-input form-control input-sm" type="text" name="col1" value="John" style="display: none;" disabled=""></td>
+                                    <td style="white-space: nowrap; width: 15%;"><div class="tabledit-toolbar btn-toolbar" style="text-align: left;">
+                                    @if($item->level != 1)
+                                    <div class="btn-group btn-group-sm" style="float: none;">
+                                        <button type="button" data-toggle="modal" data-target="#modalEditUser" data-id="{{$item->id}}" class="btn-edit tabledit-edit-button btn btn-sm btn-light" style="float: none; margin: 5px;"><span class="ti-pencil"></span></button>
+                                        <button type="button" data-id="{{$item->id}}" class="btn-delete tabledit-delete-button btn btn-sm btn-light" style="float: none; margin: 5px;"><span class="ti-trash text-danger"></span></button></div>
+                                    </div>
+                                    @endif
+                                    </td>
                             </tr>
                             @endforeach
                             </tbody>
                         </table>
                     </div>
-                    {{$user->links()}}
+                    {{$service->links()}}
                 </div>
             </div>
         </div> <!-- end col -->
@@ -122,7 +131,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title mt-0">Edit user</h5>
+            <h5 class="modal-title mt-0">Edit service</h5>
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
         </div>
         <div class="modal-body">
@@ -179,7 +188,9 @@
 </div>
 @endsection
 @section('script')
+<script src="vendor/laravel-filemanager/js/lfm.js?v={{ time() }}"></script>
 <script>
+    $('.lfm').filemanager('image');
     var token = '{{ csrf_token() }}';
     $('.btn-edit').on('click', function(){
         var id = $(this).data('id');

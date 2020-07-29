@@ -72,20 +72,12 @@ Route::group(['prefix' => 'system', 'middleware' => 'AdminLoginMiddleware'], fun
     Route::group(['prefix' => 'user'], function () {
         Route::get('list', 'System\UserController@getListUser')->name('system.user.getListUser');
         Route::post('add', 'System\UserController@postAddUser')->name('system.user.postAddUser');
-        Route::post('ajax', 'System\UserController@postAjax')->name('system.user.postAjaxUser');
-        Route::get('ajax-edit', 'System\UserController@postAjaxEdit')->name('system.user.postAjaxEditUser');
+        Route::post('ajax', 'System\UserController@postAjax')->name('system.user.postAjax');
+        Route::get('ajax-edit', 'System\UserController@postAjaxEdit')->name('system.user.postAjaxEdit');
         Route::get('delete', 'System\UserController@getDeleteUser')->name('system.user.getDeleteUser');
-        // Route::get('edit/{locale}/{id}', 'Admin\AdminLoginController@getEditUser')->name('system.admin.user.getEditUser');
-        // Route::post('edit', 'Admin\AdminLoginController@postEditUser')->name('system.admin.user.postEditUser');
+        Route::get('edit/{locale}/{id}', 'Admin\AdminLoginController@getEditUser')->name('system.admin.user.getEditUser');
+        Route::post('edit', 'Admin\AdminLoginController@postEditUser')->name('system.admin.user.postEditUser');
         Route::post('change-password', 'System\UserController@postChangePassword')->name('system.user.postChangePassword');
-    });
-    Route::group(['prefix' => 'service'], function () {
-        Route::get('list', 'System\ServiceController@getListService')->name('system.service.getListService');
-        Route::post('add', 'System\ServiceController@postAddService')->name('system.service.postAddService');
-        Route::post('ajax', 'System\ServiceControllerServiceController@postAjax')->name('system.user.postAjax');
-        Route::get('ajax-edit', 'System\ServiceController@postAjaxEdit')->name('system.user.postAjaxEdit');
-        Route::get('delete', 'System\ServiceController@getDeleteUser')->name('system.user.getDeleteUser');
-        Route::post('change-password', 'System\ServiceController@postChangePassword')->name('system.user.postChangePassword');
     });
     Route::group(['prefix' => 'menu'], function () {
         Route::get('list', 'Admin\MenuController@getListMenu')->name('system.admin.menu.getListMenu');

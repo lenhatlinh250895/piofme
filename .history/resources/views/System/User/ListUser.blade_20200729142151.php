@@ -185,7 +185,7 @@
         var id = $(this).data('id');
         $.ajax({
             type: 'POST',
-            url: "{{ route('system.user.postAjaxUser')}}",
+            url: "{{ route('system.user.postAjax')}}",
             data: {_token: token, id: id},
             dataType: 'JSON',
             success: function($result){
@@ -225,7 +225,7 @@
         console.log(data);
         $.ajax({
             type: 'GET',
-            url: "{{ route('system.user.postAjaxEditUser')}}",
+            url: "{{ route('system.user.postAjaxEdit')}}",
             data: data,
             // dataType: 'JSON',
             success: function($result){
@@ -244,32 +244,17 @@
 
     $('.btn-delete').on('click', function(){
         var id = $(this).data('id');
-        Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, deleit!'
-        }).then((result) => {
-            if (result.value) {
-                $.ajax({
-                    type: 'GET',
-                    url: "{{ route('system.user.getDeleteUser')}}",
-                    data: {_token: token, id: id},
-                    success: function($result){
-                        console.log($result);
-                        if($result){
-                            toastr.success('Delete user successfully!', 'Success!', {timeOut: 3500});
-                            $('#id_'+id).hide();
-                        }else{
-                            toastr.error('Delete user error!', 'Error!', {timeOut: 3500});
-                        }
-                    },
-                });
-            }
-        })
+        $.ajax({
+            type: 'GET',
+            url: "{{ route('system.user.getDeleteUser')}}",
+            data: {_token: token, id: id},
+            dataType: 'JSON',
+            success: function($result){
+                if($result){
+                    
+                }
+            },
+        });
     })
 </script>
 @endsection

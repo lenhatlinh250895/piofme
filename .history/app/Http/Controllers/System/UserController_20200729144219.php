@@ -5,9 +5,6 @@ namespace App\Http\Controllers\System;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\User;
-use Illuminate\Support\Facades\Auth;
-use DB;
-use Hash;
 
 class UserController extends Controller
 {
@@ -65,26 +62,5 @@ class UserController extends Controller
         }else{
             echo false;
         }
-    }
-
-    public function postChangePassword(Request $req)
-    {
-        $this->validate($req, [
-            'current-password' => 'required',
-            'new-password' => 'required|min:6',
-            're-password' => 'required|same:new-password',
-        ]);
-
-        $user = Auth::user();
-        $dbPassword = DB::table('users')->where('id', $user->id)->value('password');
-
-        if (Hash::check($req->input('current-password'), $dbPassword)) {
-
-            $updatePassword = DB::table('users')->where('id', $user->id)->update([
-                'password' => bcrypt($req->input('new-password'))
-            ]);
-            return redirect()->back()->with(['flash_level' => 'success', 'flash_message' => 'Password changed successful']);
-        }
-        return redirect()->back()->with(['flash_level' => 'error', 'flash_message' => 'Current password incorrect']);
     }
 }

@@ -6,13 +6,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use Hash;
+use hash;
 
 class LoginController extends Controller
 {
     public function getLogin()
     {
-        // dd(hash::make(123456));
+        dd(hash::make(123456));
         if(Auth::check()){
             return redirect()->route('Dashbroad.getIndex');
         }

@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Model\User;
 use Illuminate\Support\Facades\Auth;
 use DB;
-use Hash;
 
 class UserController extends Controller
 {

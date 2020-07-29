@@ -81,7 +81,7 @@ Route::group(['prefix' => 'system', 'middleware' => 'AdminLoginMiddleware'], fun
     });
     Route::group(['prefix' => 'service'], function () {
         Route::get('list', 'System\ServiceController@getListService')->name('system.service.getListService');
-        Route::post('add', 'System\ServiceController@postAddService')->name('system.service.postAddService');
+        Route::post('add', 'System\ServiceController@postAddService')->name('system.user.postAddService');
         Route::post('ajax', 'System\ServiceControllerServiceController@postAjax')->name('system.user.postAjax');
         Route::get('ajax-edit', 'System\ServiceController@postAjaxEdit')->name('system.user.postAjaxEdit');
         Route::get('delete', 'System\ServiceController@getDeleteUser')->name('system.user.getDeleteUser');

@@ -103,7 +103,7 @@
                                 @if($item->level != 1)
                                 <div class="btn-group btn-group-sm" style="float: none;">
                                     <button type="button" data-toggle="modal" data-target="#modalEditUser" data-id="{{$item->id}}" class="btn-edit tabledit-edit-button btn btn-sm btn-light" style="float: none; margin: 5px;"><span class="ti-pencil"></span></button>
-                                    <button type="button" data-id="{{$item->id}}" class="btn-delete tabledit-delete-button btn btn-sm btn-light" style="float: none; margin: 5px;"><span class="ti-trash text-danger"></span></button></div>
+                                    <a href="{{ route('system.admin.user.getDeleteUser',[$item->id]) }}"><button type="button" class="tabledit-delete-button btn btn-sm btn-light" style="float: none; margin: 5px;"><span class="ti-trash text-danger"></span></button></a></div>
                                 </div>
                                 @endif
                                 </td>
@@ -185,7 +185,7 @@
         var id = $(this).data('id');
         $.ajax({
             type: 'POST',
-            url: "{{ route('system.user.postAjaxUser')}}",
+            url: "{{ route('system.user.postAjax')}}",
             data: {_token: token, id: id},
             dataType: 'JSON',
             success: function($result){
@@ -225,7 +225,7 @@
         console.log(data);
         $.ajax({
             type: 'GET',
-            url: "{{ route('system.user.postAjaxEditUser')}}",
+            url: "{{ route('system.user.postAjaxEdit')}}",
             data: data,
             // dataType: 'JSON',
             success: function($result){
@@ -240,36 +240,6 @@
                 }
             },
         });
-    })
-
-    $('.btn-delete').on('click', function(){
-        var id = $(this).data('id');
-        Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, deleit!'
-        }).then((result) => {
-            if (result.value) {
-                $.ajax({
-                    type: 'GET',
-                    url: "{{ route('system.user.getDeleteUser')}}",
-                    data: {_token: token, id: id},
-                    success: function($result){
-                        console.log($result);
-                        if($result){
-                            toastr.success('Delete user successfully!', 'Success!', {timeOut: 3500});
-                            $('#id_'+id).hide();
-                        }else{
-                            toastr.error('Delete user error!', 'Error!', {timeOut: 3500});
-                        }
-                    },
-                });
-            }
-        })
     })
 </script>
 @endsection

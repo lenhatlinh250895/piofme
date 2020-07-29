@@ -12,7 +12,6 @@ class LoginController extends Controller
 {
     public function getLogin()
     {
-        // dd(hash::make(123456));
         if(Auth::check()){
             return redirect()->route('Dashbroad.getIndex');
         }

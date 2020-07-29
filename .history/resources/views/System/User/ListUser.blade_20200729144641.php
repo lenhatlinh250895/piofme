@@ -185,7 +185,7 @@
         var id = $(this).data('id');
         $.ajax({
             type: 'POST',
-            url: "{{ route('system.user.postAjaxUser')}}",
+            url: "{{ route('system.user.postAjax')}}",
             data: {_token: token, id: id},
             dataType: 'JSON',
             success: function($result){
@@ -225,7 +225,7 @@
         console.log(data);
         $.ajax({
             type: 'GET',
-            url: "{{ route('system.user.postAjaxEditUser')}}",
+            url: "{{ route('system.user.postAjaxEdit')}}",
             data: data,
             // dataType: 'JSON',
             success: function($result){
@@ -269,7 +269,7 @@
                     },
                 });
             }
-        })
+        }
     })
 </script>
 @endsection

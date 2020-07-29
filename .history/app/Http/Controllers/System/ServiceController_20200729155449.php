@@ -4,16 +4,16 @@ namespace App\Http\Controllers\System;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Model\User;
+use App\Model\Service;
 use Illuminate\Support\Facades\Auth;
 use DB;
 use Hash;
 
-class UserController extends Controller
+class ServiceController extends Controller
 {
     public function getListUser() {
-        $user = User::paginate(20);
-        return view('System.User.ListUser', compact('user'));
+        $service = Service::paginate(20);
+        return view('System.Service.ListService', compact('service'));
     }
 
     public function postAddUser(Request $request) {

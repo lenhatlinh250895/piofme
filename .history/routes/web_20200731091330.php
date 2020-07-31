@@ -101,10 +101,10 @@ Route::group(['prefix' => 'system', 'middleware' => 'AdminLoginMiddleware'], fun
     });
     Route::group(['prefix' => 'quote'], function () {
         Route::get('list', 'System\QuoteController@getListQuote')->name('system.quote.getListQuote');
-        Route::post('add', 'System\QuoteController@postAddQuote')->name('system.quote.postAddQuote');
-        Route::get('edit/{id}', 'System\QuoteController@getEditQuote')->name('system.quote.getEditQuote');
-        Route::post('edit', 'System\QuoteController@postEditQuote')->name('system.quote.postEditQuote');
-        Route::get('delete', 'System\QuoteController@getDeleteQuote')->name('system.quote.getDeleteQuote');
+        Route::post('add', 'System\NewsController@postAddNews')->name('system.news.postAddNews');
+        Route::get('edit/{id}', 'System\NewsController@getEditNews')->name('system.news.getEditNews');
+        Route::post('edit', 'System\NewsController@postEditNews')->name('system.news.postEditNews');
+        Route::get('delete', 'System\NewsController@getDeleteNews')->name('system.news.getDeleteNews');
     });
     Route::group(['prefix' => 'menu'], function () {
         Route::get('list', 'Admin\MenuController@getListMenu')->name('system.admin.menu.getListMenu');

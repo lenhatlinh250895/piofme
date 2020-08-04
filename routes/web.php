@@ -13,6 +13,10 @@
 
 Route::get('/', 'HomeController@getIndex')->name('getIndex');
 Route::get('/solution', 'HomeController@getSolution')->name('getSolution');
+Route::get('/product', 'HomeController@getProduct')->name('getProduct');
+Route::get('/app-game', 'HomeController@getAppGame')->name('getAppGame');
+Route::get('/new', 'HomeController@getNewDetail')->name('getNew');
+Route::get('/new-detail', 'HomeController@getNewDetail')->name('getNewDetail');
 
 Route::get('system/login', 'Auth\LoginController@getLogin')->name('getLogin');
 Route::post('system/login', 'Auth\LoginController@postLogin')->name('postLogin');
@@ -106,18 +110,25 @@ Route::group(['prefix' => 'system', 'middleware' => 'AdminLoginMiddleware'], fun
         Route::post('edit', 'System\QuoteController@postEditQuote')->name('system.quote.postEditQuote');
         Route::get('delete', 'System\QuoteController@getDeleteQuote')->name('system.quote.getDeleteQuote');
     });
-    Route::group(['prefix' => 'menu'], function () {
-        Route::get('list', 'Admin\MenuController@getListMenu')->name('system.admin.menu.getListMenu');
-        Route::get('add', 'Admin\MenuController@getAddMenu')->name('system.admin.menu.getAddMenu');
-        Route::post('add', 'Admin\MenuController@postAddMenu')->name('system.admin.menu.postAddMenu');
-        Route::get('delete/{id}', 'Admin\MenuController@getDeleteMenu')->name('system.admin.menu.getDeleteMenu');
-        Route::get('edit/{locale}/{id}', 'Admin\MenuController@getEditMenu')->name('system.admin.menu.getEditMenu');
-        Route::post('edit', 'Admin\MenuController@postEditMenu')->name('system.admin.menu.postEditMenu');
-        Route::get('edit/menu-item', 'Admin\MenuController@getEditMenuItem')->name('system.admin.menu.getEditMenuItem');
-        Route::post('edit/menu-item', 'Admin\MenuController@postEditMenuItem')->name('system.admin.menu.postEditMenuItem');
+    Route::group(['prefix' => 'information_quote'], function () {
+        Route::get('list', 'System\InformationQuoteController@getListInformationQuote')->name('system.information_quote.getListInformationQuote');
+        Route::post('add', 'System\InformationQuoteController@postAddInformationQuote')->name('system.information_quote.postAddInformationQuote');
+        Route::get('edit/{id}', 'System\InformationQuoteController@getEditInformationQuote')->name('system.information_quote.getEditInformationQuote');
+        Route::post('edit', 'System\InformationQuoteController@postEditInformationQuote')->name('system.information_quote.postEditInformationQuote');
+        Route::get('delete', 'System\InformationQuoteController@getDeleteInformationQuote')->name('system.information_quote.getDeleteInformationQuote');
     });
-    Route::get('meta', 'Admin\ContactController@getMeta')->name('getMeta');
-    Route::post('meta', 'Admin\ContactController@postMeta')->name('postMeta');
-    Route::get('contact', 'Admin\ContactController@getContact')->name('getContact');
-    Route::get('contact-delete/{id}', 'Admin\ContactController@getDeleContact')->name('getDeleContact');
+    Route::group(['prefix' => 'menu'], function () {
+        Route::get('list', 'System\MenuController@getListMenu')->name('system.menu.getListMenu');
+        Route::post('edit', 'System\MenuController@postEditMenu')->name('system.menu.postEditMenu');
+    });
+    // Route::get('meta', 'Admin\ContactController@getMeta')->name('getMeta');
+    // Route::post('meta', 'Admin\ContactController@postMeta')->name('postMeta');
+    // Route::get('contact', 'Admin\ContactController@getContact')->name('getContact');
+    // Route::get('contact-delete/{id}', 'Admin\ContactController@getDeleContact')->name('getDeleContact');
+    Route::group(['prefix' => 'contact'], function () {
+        Route::get('list', 'System\ContactController@getListContact')->name('system.contact.getListContact');
+        Route::get('edit/{id}', 'System\ContactController@getEditContact')->name('system.contact.getEditContact');
+        Route::post('edit', 'System\ContactController@postEditContact')->name('system.contact.postEditContact');
+        Route::get('delete', 'System\ContactController@getDeleteContact')->name('system.contact.getDeleteContact');
+    });
 });
